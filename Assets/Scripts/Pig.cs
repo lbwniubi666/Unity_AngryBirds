@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Pig : MonoBehaviour
 {
-   public float maxSpeed=20;
+   public float maxSpeed=10;
    public float minSpeed=8;
    private SpriteRenderer render;
 

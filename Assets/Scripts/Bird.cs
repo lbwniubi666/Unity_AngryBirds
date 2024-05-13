@@ -39,7 +39,8 @@ public class Bird : MonoBehaviour
         rg=GetComponent<Rigidbody2D>();
         myTrail=GetComponent<TestMyTrail>();
         render=GetComponent<SpriteRenderer>();
-        
+
+        sp.distance = 0.005f;
     }
 
     private void OnMouseDown() {
@@ -82,8 +83,9 @@ public class Bird : MonoBehaviour
         if(isClick){
             transform.position=Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position+=new Vector3(0,0,-Camera.main.transform.position.z);
-        
-            if(Vector3.Distance(transform.position,rightPos.position)>maxDis){//拖拽小鸟最大距离限制
+
+            sp.distance = 0.22f;
+            if (Vector3.Distance(transform.position,rightPos.position)>maxDis){//拖拽小鸟最大距离限制
                 Vector3 pos=(transform.position-rightPos.position).normalized;//单位化向量
                 pos *=maxDis;//最大长度的向量
                 transform.position=pos+rightPos.position;

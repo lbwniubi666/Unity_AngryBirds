@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     
     private void Awake() {
         _instance=this;
-        if(birds.Count>0)
+        if(birds != null && birds.Count > 0)
         originPos=birds[0].transform.position;
         
 
@@ -42,7 +42,9 @@ public class GameManager : MonoBehaviour
                 birds[i].enabled=true;
                 birds[i].sp.enabled=true;
                 birds[i].canMove=true;//只有上弹弓的小鸟才可被点击
+                birds[i].transform.eulerAngles=Vector3.zero; //每次设置小鸟的旋转
             }else{
+                
                 birds[i].enabled=false;
                 birds[i].sp.enabled=false;
                 birds[i].canMove=false;
@@ -50,7 +52,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-  public  void NextBird(){
+    public  void NextBird(){
         if(pigs.Count>0){
             if(birds.Count>0){
                 //下一只小鸟飞
@@ -76,6 +78,7 @@ public class GameManager : MonoBehaviour
     
     public void Replay(){
         SaveData();
+        Time.timeScale = 1;
         SceneManager.LoadScene(2);
 
     }
@@ -83,6 +86,20 @@ public class GameManager : MonoBehaviour
     public void Home(){
         SaveData();
         SceneManager.LoadScene(1);
+    }
+
+    //下一关
+    public void Next()
+    {
+        SaveData();
+        string str = PlayerPrefs.GetString("nowLevel");
+        int nowLevel;
+        if (int.TryParse(str.Replace("level", ""), out nowLevel))
+        {
+            nowLevel++;
+            PlayerPrefs.SetString("nowLevel", "level" + nowLevel.ToString());
+        }
+        SceneManager.LoadScene(2);
     }
 
 public void ShowStars(){

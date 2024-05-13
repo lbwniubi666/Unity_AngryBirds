@@ -6,6 +6,14 @@ public class Loadlevel : MonoBehaviour
 {
     private void Awake()
     {
-       Instantiate(Resources.Load(PlayerPrefs.GetString("nowLevel")));//加载游戏关卡
+        var level = Resources.Load(PlayerPrefs.GetString("nowLevel"));
+        if (level != null)
+        {
+            Instantiate(level); //加载游戏关卡
+        }
+        else
+        {
+            Debug.LogError("Level not found");
+        }
     }
 }

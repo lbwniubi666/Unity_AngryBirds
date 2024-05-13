@@ -35,7 +35,7 @@ public class BlackBird : Bird
     public override void ShowSkill(){//鼠标左键点击触发，清除碰撞检测范围内的物体
 
         base.ShowSkill();
-        if(blocks.Count>0&&blocks!=null){
+        if(blocks != null && blocks.Count > 0){
             for(int i=0;i<blocks.Count;i++){
                 blocks[i].Dead();
             }
